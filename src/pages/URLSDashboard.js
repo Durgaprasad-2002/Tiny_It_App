@@ -33,10 +33,15 @@ export default function URLSDashboard() {
 
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem("user"));
+
     if (localStorageUser) {
       setUser(localStorageUser);
       console.log(localStorageUser);
       fetchURLS(localStorageUser?._id);
+    }
+    if (!user || !user.username) {
+      navigate("/login");
+      return;
     }
   }, [fetchURLS]);
 

@@ -87,7 +87,7 @@ export default function NavBar() {
                   <li>{user?.username}</li>
                 ) : (
                   <Link to="/login">
-                    <li>Logout</li>
+                    <li>Login</li>
                   </Link>
                 )}
               </ul>

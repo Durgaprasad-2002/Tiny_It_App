@@ -83,7 +83,10 @@ export default function Register() {
         </button>
 
         <p className="login-description">
-          Already have Account? <Link to="/login">Login</Link>
+          Already have Account?{" "}
+          <Link to="/login" style={{ color: "black" }}>
+            Login
+          </Link>
         </p>
       </form>
     </div>

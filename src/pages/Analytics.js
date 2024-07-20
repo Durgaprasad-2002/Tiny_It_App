@@ -5,13 +5,20 @@ import NavBar from "./NavBar";
 import "./index.css";
 import { Link } from "react-router-dom";
 import { FaLink } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Analytics = () => {
+  const navigate = useNavigate();
   const { shortUrl } = useParams();
   const location = useLocation();
   const [analyticsData, setAnalyticsData] = useState(null);
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.username) {
+      navigate("/login");
+      return;
+    }
     fetchAnalyticsData();
   }, [location.state]);
 
