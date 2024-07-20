@@ -5,6 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import URLDashboard from "./pages/URLSDashboard";
+import URL_Main_page from "./pages/URL_Main_page";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/shorten" element={<URL_Main_page />} />
         <Route path="/analytics" element={<URLDashboard />} />
         <Route path="/analytic/:shortUrl" element={<Analytics />} />
       </Routes>

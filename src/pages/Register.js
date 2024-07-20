@@ -23,28 +23,24 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading((prev) => true);
 
-    try {
-      axios
-        .post("https://tinyit-sgzi.onrender.com/api/user/register", {
-          username: formData.username,
-          email: formData.email,
-          password: formData.password,
-        })
-        .then((data) => {
-          console.log(data.data);
-          navigate("/login", {});
-        })
-        .catch((err) => {
-          console.log("error:", err);
-          alert("Failed to Register");
-        });
-    } catch (error) {
-      console.error("Registration failed:", error);
-    } finally {
-      setLoading(false);
-    }
+    axios
+      .post("https://tinyit-sgzi.onrender.com/api/user/register", {
+        username: formData.username,
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((data) => {
+        console.log(data.data);
+        setLoading((prev) => false);
+        navigate("/login", {});
+      })
+      .catch((err) => {
+        console.log("error:", err);
+        setLoading((prev) => false);
+        alert("Failed to Register");
+      });
   };
 
   return (

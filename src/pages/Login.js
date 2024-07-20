@@ -24,29 +24,25 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setLoading((prev) => true);
 
-    try {
-      axios
-        .post("https://tinyit-sgzi.onrender.com/api/user/login", {
-          email: formData.email,
-          password: formData.password,
-        })
-        .then((data) => {
-          localStorage.setItem("token", JSON.stringify(data.data.token));
-          localStorage.setItem("user", JSON.stringify(data.data.user));
-          navigate("/", {});
-          console.log(data.data);
-        })
-        .catch((err) => {
-          console.log("error:", err);
-          alert("Failed to Login");
-        });
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setLoading(false);
-    }
+    axios
+      .post("https://tinyit-sgzi.onrender.com/api/user/login", {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((data) => {
+        localStorage.setItem("token", JSON.stringify(data.data.token));
+        localStorage.setItem("user", JSON.stringify(data.data.user));
+        navigate("/", {});
+        console.log(data.data);
+        setLoading((prev) => false);
+      })
+      .catch((err) => {
+        console.log("error:", err);
+        alert("Failed to Login");
+        setLoading((prev) => false);
+      });
   };
 
   return (
@@ -73,7 +69,7 @@ export default function Register() {
           onChange={handleChange}
         />
         <button type="submit" className="submit-btn" disabled={loading}>
-          {loading ? "Verifying User..." : "Login"}
+          {loading == true ? "Verifying User..." : "Login"}
         </button>
 
         <p className="login-description">
