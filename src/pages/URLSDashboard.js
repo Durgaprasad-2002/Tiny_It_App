@@ -52,7 +52,16 @@ const URLSDashboard = () => {
       <div className="outer-main">
         <div className="outer-body">
           <div className="outer-dash-2">
-            <h2 className="username-text">Welcome, {user?.username}</h2>
+            <h2
+              className="username-text"
+              style={{
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                height: "fit-content",
+              }}
+            >
+              Welcome, {user?.username}
+            </h2>
 
             <div className="total-count-conatiner">
               <div className="inner-total-count-conatiner">

@@ -28,7 +28,7 @@ const Analytics = () => {
           shortUrl?.split(":")[1]
         }`
       );
-      console.log(response.data);
+
       setAnalyticsData(response.data);
     } catch (error) {
       setError("Failed to retrieve analytics. Please try again later.");
@@ -43,7 +43,7 @@ const Analytics = () => {
         <div className="analytics-container">
           {error && <p className="error">{error}</p>}
           {analyticsData ? (
-            <div>
+            <>
               <h2>
                 Analytics for{" "}
                 <Link
@@ -53,16 +53,16 @@ const Analytics = () => {
                   {analyticsData.shortUrl}
                 </Link>
               </h2>
-              <p>
+              <pre className="analytics-long">
                 <FaLink className="link-icon" />{" "}
                 <Link to={analyticsData.longUrl} target="_blank">
                   {analyticsData.longUrl}
                 </Link>
-              </p>
+              </pre>
               <p>
                 <b>Total Clicks:</b> {analyticsData.clicks}
               </p>
-            </div>
+            </>
           ) : (
             <p>Loading analytics data...</p>
           )}

@@ -135,6 +135,11 @@ body {
   height: fit-content;
 }
 
+.analytics-long {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
 .click-details-card {
   border-left: lightgreen 4px solid;
   padding-left: 7px;
@@ -146,6 +151,7 @@ body {
   flex-wrap: wrap;
   font-family: var(--Font-family);
   padding: 0px 0px 30px 0px;
+  width: auto;
 }
 
 .Search-box-Container {
@@ -453,7 +459,7 @@ body {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
-  width: 100%;
+  width: 80%;
   max-width: 800px;
 }
 

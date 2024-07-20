@@ -49,7 +49,6 @@ export default function URL_Main_page() {
         userId: user._id,
       })
       .then((response) => {
-        console.log(response.data);
         setShortId(response.data.shortUrl);
         setLoading(false);
       })

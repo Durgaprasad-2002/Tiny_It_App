@@ -32,7 +32,6 @@ export default function Register() {
         password: formData.password,
       })
       .then((data) => {
-        console.log(data.data);
         setLoading((prev) => false);
         navigate("/login", {});
       })

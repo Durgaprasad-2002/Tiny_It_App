@@ -35,7 +35,7 @@ export default function Register() {
         localStorage.setItem("token", JSON.stringify(data.data.token));
         localStorage.setItem("user", JSON.stringify(data.data.user));
         navigate("/", {});
-        console.log(data.data);
+
         setLoading((prev) => false);
       })
       .catch((err) => {
