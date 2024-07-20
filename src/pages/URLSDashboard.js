@@ -4,46 +4,46 @@ import NavBar from "./NavBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export default function URLSDashboard() {
-  let navigate = useNavigate();
+const URLSDashboard = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalClicks, setTotalClicks] = useState(0);
 
-  function CountClicks(data) {
-    let count = 0;
-    data.forEach((e) => (count += e.clicks));
-    setTotalClicks(count);
-  }
-
   const fetchURLS = useCallback(async (userId) => {
-    console.log("user Id:", userId);
     try {
       const response = await axios.get(
         `https://tinyit-sgzi.onrender.com/api/url/urlsInfo/${userId}`
       );
-      console.log(response.data);
+
       setData(response.data);
       CountClicks(response.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching URLs:", error);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem("user"));
-
-    if (localStorageUser) {
-      setUser(localStorageUser);
-      console.log(localStorageUser);
-      fetchURLS(localStorageUser?._id);
-    }
-    if (!user || !user.username) {
+    if (!localStorageUser || !localStorageUser.username) {
       navigate("/login");
       return;
     }
-  }, [fetchURLS]);
+
+    if (localStorageUser) {
+      setUser(localStorageUser);
+      fetchURLS(localStorageUser._id);
+    }
+  }, [fetchURLS, navigate]);
+
+  const CountClicks = (data) => {
+    let count = 0;
+    data.forEach((e) => (count += e.clicks));
+    setTotalClicks(count);
+  };
 
   return (
     <>
@@ -54,15 +54,19 @@ export default function URLSDashboard() {
 
           <div className="total-count-conatiner">
             <div className="inner-total-count-conatiner">
-              <h4>Live Links : {data.length || 0}</h4>
+              <h4>Live Links: {data.length || 0}</h4>
             </div>
             <div className="inner-total-count-conatiner">
-              <h4>Total Clicks : {totalClicks}</h4>
+              <h4>Total Clicks: {totalClicks}</h4>
             </div>
           </div>
         </div>
 
-        {data.length === 0 ? (
+        {loading ? (
+          <div className="loading-container">
+            <p>Loading...</p>
+          </div>
+        ) : data.length === 0 ? (
           <div className="no-URLS-Added-outer">
             <p className="no-urls-text">
               You haven't shortened any URLs yet, Do it Now
@@ -77,7 +81,7 @@ export default function URLSDashboard() {
                 onClick={() => navigate(`/analytic/:${ele.shortUrl}`)}
               >
                 <h4>{ele.title}</h4>
-                <h5>Clicks : {ele.clicks}</h5>
+                <h5>Clicks: {ele.clicks}</h5>
               </div>
             ))}
           </div>
@@ -85,4 +89,6 @@ export default function URLSDashboard() {
       </div>
     </>
   );
-}
+};
+
+export default URLSDashboard;

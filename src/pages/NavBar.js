@@ -1,10 +1,10 @@
 import React from "react";
-import { MdOutlineWbSunny } from "react-icons/md";
-import { FaMoon } from "react-icons/fa6";
+
 import "./index.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { IoIosLogOut } from "react-icons/io";
 
 export default function NavBar() {
   const [toggle, settoggle] = useState(false);
@@ -90,13 +90,14 @@ export default function NavBar() {
                     <li>Login</li>
                   </Link>
                 )}
-              </ul>
-            </div>
-            <div>
-              {" "}
-              <ul className="nav-lists">
                 <li onClick={HandleLogout}>
-                  {user?.username != undefined ? "Logout" : ""}
+                  {user?.username != undefined ? (
+                    <>
+                      Logout <IoIosLogOut className="link-icon-2" />
+                    </>
+                  ) : (
+                    ""
+                  )}
                 </li>
               </ul>
             </div>
