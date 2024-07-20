@@ -13,9 +13,9 @@ export default function NavBar() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    let LocalStorageUser = JSON.parse(localStorage.getItem("user"));
-    if (LocalStorageUser) {
-      setuser(LocalStorageUser);
+    let sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
+    if (sessionStorageUser) {
+      setuser(sessionStorageUser);
     }
   }, []);
 
@@ -24,7 +24,7 @@ export default function NavBar() {
   };
 
   function HandleLogout() {
-    localStorage.clear();
+    sessionStorage.clear();
     navigate("/login");
     setuser({});
   }

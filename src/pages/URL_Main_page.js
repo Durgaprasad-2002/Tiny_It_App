@@ -15,9 +15,9 @@ export default function URL_Main_page() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    const localStorageUser = JSON.parse(localStorage.getItem("user"));
-    if (localStorageUser) {
-      setuser(localStorageUser);
+    const sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
+    if (sessionStorageUser) {
+      setuser(sessionStorageUser);
     }
   }, []);
 

@@ -28,15 +28,15 @@ const URLSDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const localStorageUser = JSON.parse(localStorage.getItem("user"));
-    if (!localStorageUser || !localStorageUser.username) {
+    const sessionStorageUser = JSON.parse(sessionStorage.getItem("user"));
+    if (!sessionStorageUser || !sessionStorageUser.username) {
       navigate("/login");
       return;
     }
 
-    if (localStorageUser) {
-      setUser(localStorageUser);
-      fetchURLS(localStorageUser._id);
+    if (sessionStorageUser) {
+      setUser(sessionStorageUser);
+      fetchURLS(sessionStorageUser._id);
     }
   }, [fetchURLS, navigate]);
 

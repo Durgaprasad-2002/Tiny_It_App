@@ -32,8 +32,11 @@ export default function Register() {
         password: formData.password,
       })
       .then((data) => {
-        localStorage.setItem("token", JSON.stringify(data.data.token));
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        sessionStorage.setItem("token", JSON.stringify(data.data.token));
+        sessionStorage.setItem("user", JSON.stringify(data.data.user));
+        setTimeout(() => {
+          sessionStorage.clear();
+        }, 3600000);
         navigate("/", {});
 
         setLoading((prev) => false);
