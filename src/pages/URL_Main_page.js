@@ -113,10 +113,10 @@ export default function URL_Main_page() {
               <p className="intro-text">
                 Your shorten URL,{" "}
                 <Link
-                  to={`https://tinyit-sgzi.onrender.com/api/url/${shortId}`}
+                  to={`https://tinyit-sgzi.onrender.com/${shortId}`}
                   target="new"
                 >
-                  https://tinyit-sgzi.onrender.com/api/url/{shortId}
+                  tinyit-sgzi.onrender.com/{shortId}
                 </Link>
               </p>
             </>

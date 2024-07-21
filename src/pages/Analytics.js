@@ -47,7 +47,7 @@ const Analytics = () => {
               <h2>
                 Analytics for{" "}
                 <Link
-                  to={`https://tinyit-sgzi.onrender.com/api/url/${analyticsData.shortUrl}`}
+                  to={`https://tinyit-sgzi.onrender.com/${analyticsData.shortUrl}`}
                   target="_blank"
                 >
                   {analyticsData.shortUrl}
@@ -73,16 +73,26 @@ const Analytics = () => {
             <div>
               <h2 className="click-deatils-title">Click Details</h2>
               <div>
-                {analyticsData?.clickDetails.map((data) => {
-                  return (
-                    <>
-                      <div className="click-details-card">
-                        <h4>Requested From Domain: {data.referrer}</h4>
-                        <p style={{ fontSize: "small" }}>{Date(data.date)}</p>
-                      </div>
-                    </>
-                  );
-                })}
+                {analyticsData?.clickDetails.length != 0 ? (
+                  <>
+                    {analyticsData?.clickDetails.map((data) => {
+                      return (
+                        <>
+                          <div className="click-details-card">
+                            <h4>Requested From Domain: {data.referrer}</h4>
+                            <p style={{ fontSize: "small" }}>
+                              {Date(data.date)}
+                            </p>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <>
+                    <p>The shortUrl didn't used to display Click Details</p>
+                  </>
+                )}
               </div>
             </div>
           ) : (
